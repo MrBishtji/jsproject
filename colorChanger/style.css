@@ -1,0 +1,37 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+span {
+  display: block;
+}
+body {
+  transition: background-color 0.5s;
+  margin: 100px auto;
+  width: 100%;
+  text-align: center;
+}
+
+.button {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border: solid black 4px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#red {
+  background: #f70909;
+}
+
+#skyblue {
+  background: skyblue;
+}
+#green {
+  background: green;
+}
+#blue {
+  background: #071ffd;
+}
