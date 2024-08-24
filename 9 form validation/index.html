@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <i class="ri-send-plane-fill send"></i>
+        <div class="inputFill">
+          <label for="Name">Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            id="fullName"
+            class="inputbox"
+            placeholder="Enter Your Name"
+            onkeyup="validateName()"
+          />
+          <span id="name-error"></span>
+        </div>
+        <div class="inputFill">
+          <label for="phoneNo">Phone No.</label>
+          <input
+            type="tel"
+            name="PhoneNo"
+            id="PhoneNo"
+            class="inputbox"
+            placeholder="1234567890"
+            onkeyup="validatePhone()"
+          />
+          <span id="phone-error"></span>
+        </div>
+        <div class="inputFill">
+          <label for="email">Email Id:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="inputbox"
+            placeholder="Enter Email ID"
+            onkeyup="validateEmail()"
+          />
+          <span id="email-error"></span>
+        </div>
+        <div class="inputFill">
+          <label for="message">Your Message</label>
+          <textarea
+            name="message"
+            id="message"
+            rows="5"
+            placeholder="Enter Message"
+            onkeyup="validateMessage()"
+          ></textarea>
+          <span id="message-error"></span>
+        </div>
+        <button
+          onclick="return validateForm()"
+          type="submit"
+          value="submit"
+          id="btn"
+        >
+          Submit
+        </button>
+        <span id="submit-error"></span>
+      </form>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
