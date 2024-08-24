@@ -47,9 +47,9 @@ body {
 ::placeholder {
   font-size: 14px;
 }
-#message {
-  /* height: 100px; */
-}
+/* #message {*/
+/* height: 100px; */
+
 .container button {
   padding: 10px 40px;
   background-color: #222;
