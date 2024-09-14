@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #212121;
+  color: #fff;
+}
+h1 {
+  margin: 50px;
+}
+button {
+  padding: 20px;
+  width: 200px;
+  border-radius: 30px;
+  border: 5px solid black;
+  outline: 0;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 50px;
+  cursor: pointer;
+}
+button:hover {
+  background: #ffa;
+  box-shadow: inset 2px 1px 15px 2px salmon;
+}

@@ -1,126 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notes apps</title>
-    <link rel="stylesheet" href="style.css" />
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      .container {
-        width: 100%;
-        min-height: 100vh;
-        background: linear-gradient(135deg, #33d6e5, #033a71);
 
-        color: #fff;
-        padding-top: 4%;
-        padding-left: 10%;
-      }
-      .container h1 {
-        font-size: 35px;
-        display: flex;
-        align-items: center;
-        font-weight: 600;
-      }
-      .container h1 img {
-        width: 60px;
-      }
-      .container button img {
-        width: 25px;
-        margin-right: 8px;
-      }
-      .container button {
-        display: flex;
-        align-items: center;
-        background: linear-gradient(rgb(15, 227, 57), rgb(6, 143, 97));
-        color: #fff;
-        font-size: 16px;
-        outline: 0;
-        border: 0;
-        border-radius: 40px;
-        padding: 15px 25px;
-        margin: 20px 0 20px;
-        cursor: pointer;
-      }
-      .text-note {
-        width: 100%;
-        max-width: 500px;
-        min-height: 150px;
-        background: #fff;
-        position: relative;
-        color: #333;
-        padding: 20px;
-        margin: 20px 0;
-        outline: none;
-        border-radius: 5px;
-      }
-      .text-note img {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        width: 30px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1><img src="./images/notes.png" alt="" /> Notes</h1>
-      <button class="btn">
-        <img src="./images/edit.png" alt="" /> Create Notes
-      </button>
-      <div class="text-contaienr">
-        <!-- <p contenteditable="true" class="text-note">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes apps</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #33d6e5, #033a71);
+      color: #fff;
+      padding-top: 4%;
+      padding-left: 10%;
+    }
+
+    .container h1 {
+      font-size: 35px;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .container h1 img {
+      width: 60px;
+    }
+
+    .container button img {
+      width: 25px;
+      margin-right: 8px;
+    }
+
+    .container button {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgb(15, 227, 57), rgb(6, 143, 97));
+      color: #fff;
+      font-size: 16px;
+      outline: 0;
+      border: 0;
+      border-radius: 40px;
+      padding: 15px 25px;
+      margin: 20px 0 20px;
+      cursor: pointer;
+    }
+
+    .text-note {
+      width: 100%;
+      max-width: 500px;
+      min-height: 150px;
+      background: #fff;
+      position: relative;
+      color: #333;
+      padding: 20px;
+      margin: 20px 0;
+      outline: none;
+      border-radius: 5px;
+    }
+
+    .text-note img {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1><img src="./images/notes.png" alt="" /> Notes</h1>
+    <button class="btn">
+      <img src="./images/edit.png" alt="" /> Create Notes
+    </button>
+    <div class="text-contaienr">
+      <!-- <p contenteditable="true" class="text-note">
           <img src="./images/delete.png" alt="" />
         </p> -->
-      </div>
     </div>
-    <script>
-      const TextContainer = document.querySelector(".text-contaienr");
+  </div>
+  <script>
+    const TextContainer = document.querySelector(".text-contaienr");
 
-      const button = document.querySelector(".btn");
-      let notes = document.querySelectorAll(".text-note");
+    const button = document.querySelector(".btn");
+    let notes = document.querySelectorAll(".text-note");
 
-      function showNotes() {
-        TextContainer.innerHTML = localStorage.getItem("notes");
-        // console.log(TextContainer);
+    function showNotes() {
+      TextContainer.innerHTML = localStorage.getItem("notes");
+      // console.log(TextContainer);
+    }
+    function updateStorage() {
+      localStorage.setItem("notes", TextContainer.innerHTML);
+    }
+    showNotes();
+    button.addEventListener("click", () => {
+      let p = document.createElement("p");
+      p.className = "text-note";
+      p.setAttribute("contenteditable", "true");
+      let Img = document.createElement("img");
+      Img.src = "./images/delete.png";
+      TextContainer.appendChild(p).appendChild(Img);
+    });
+
+    TextContainer.addEventListener("click", (e) => {
+      if (e.target.tagName === "IMG") {
+        e.target.parentElement.remove();
+        updateStorage();
+      } else if (e.target.tagName === "P") {
+        notes = document.querySelectorAll(".text-note");
+        notes.forEach((nt) => {
+          nt.onkeyup = function () {
+            updateStorage();
+          };
+        });
       }
-      function updateStorage() {
-        localStorage.setItem("notes", TextContainer.innerHTML);
+    });
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter") {
+        document.execCommand("insertLineBreak");
+        ev.preventDefault();
       }
-      showNotes();
-      button.addEventListener("click", () => {
-        let p = document.createElement("p");
-        p.className = "text-note";
-        p.setAttribute("contenteditable", "true");
-        let Img = document.createElement("img");
-        Img.src = "./images/delete.png";
-        TextContainer.appendChild(p).appendChild(Img);
-      });
+    });
+  </script>
+</body>
 
-      TextContainer.addEventListener("click", (e) => {
-        if (e.target.tagName === "IMG") {
-          e.target.parentElement.remove();
-          updateStorage();
-        } else if (e.target.tagName === "P") {
-          notes = document.querySelectorAll(".text-note");
-          notes.forEach((nt) => {
-            nt.onkeyup = function () {
-              updateStorage();
-            };
-          });
-        }
-      });
-      document.addEventListener("keydown", (ev) => {
-        if (ev.key === "Enter") {
-          document.execCommand("insertLineBreak");
-          ev.preventDefault();
-        }
-      });
-    </script>
-  </body>
 </html>
