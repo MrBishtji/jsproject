@@ -4,7 +4,9 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #2bdc2e;
+  background-color: #080d08;
+  color: #fff;
+  font-size: 18px;
 }
 h1 {
   text-align: center;
@@ -14,11 +16,18 @@ form {
   text-align: center;
   margin: 20px;
 }
+p {
+  font-size: 25px;
+  text-align: center;
+}
 #height,
 #weight {
+  outline: 0;
   margin-top: 20px;
-  height: 30px;
+  height: 40px;
   width: 150px;
+  border-radius: 15px;
+  padding: 10px;
 }
 button {
   width: 150px;
@@ -26,7 +35,7 @@ button {
   margin-top: 30px;
   padding: 10px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 15px;
   font-size: 20px;
   font-weight: 700;
   border: 2px solid black;

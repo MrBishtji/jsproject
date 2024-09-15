@@ -28,18 +28,17 @@ async function weatherCall(city) {
     document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
     if (data.weather[0].main == "Clear") {
-      weatherIcon.src = "/13 Weather App/images/clear.png";
+      weatherIcon.src = "./images/clear.png";
     } else if (data.weather[0].main == "Couds") {
-      weatherIcon.src = "/13 Weather App/images/clouds.png";
+      weatherIcon.src = "./images/clouds.png";
     } else if (data.weather[0].main == "Drizzle") {
-      weatherIcon.src = "/13 Weather App/images/drizzle.png";
+      weatherIcon.src = "./images/drizzle.png";
     } else if (data.weather[0].main == "Rain") {
-      weatherIcon.src = "/13 Weather App/images/rain.png";
+      weatherIcon.src = "./images/rain.png";
     } else if (data.weather[0] == "Snow") {
-      weatherIcon.src = "/13 Weather App/images/snow.png";
+      weatherIcon.src = "./images/snow.png";
     } else if (data.weather[0] == "Mist") {
-      document.querySelector(".weather-icon").innerHTML =
-        "/13 Weather App/images/mist.png";
+      document.querySelector(".weather-icon").innerHTML = "./images/mist.png";
     }
     document.querySelector(".weather").style.display = "block";
     errorMsg.style.display = "none";

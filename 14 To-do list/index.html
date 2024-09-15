@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(135deg, red, blue);
+      padding: 10px;
+    }
+
+    .todo-app {
+      width: 100%;
+      max-width: 540px;
+      background: #fff;
+      margin: 100px auto;
+      padding: 40px 30px 70px;
+      border-radius: 10px;
+    }
+
+    .todo-app h2 {
+      color: #002765;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+    }
+
+    .todo-app h2 img {
+      width: 30px;
+      margin-left: 10px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #edeef0;
+      border-radius: 30px;
+      padding-left: 20px;
+      margin-bottom: 25px;
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 14px;
+      font-weight: 14px;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      padding: 16px 50px;
+      color: #fff;
+      background: #ff5945;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 40px;
+    }
+
+    ul li {
+      list-style: none;
+      font-size: 18px;
+      padding: 12px 8px 12px 50px;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      height: 28px;
+      width: 28px;
+      border-radius: 50%;
+      background-image: url("./images/unchecked.png");
+      background-size: cover;
+      background-position: center;
+      top: 9px;
+      left: 8px;
+    }
+
+    ul li.checked {
+      color: #555;
+      text-decoration: line-through;
+    }
+
+    ul li.checked::before {
+      background-image: url("./images/checked.png");
+    }
+
+    ul li span {
+      position: absolute;
+      right: 0;
+      top: 5px;
+      width: 40px;
+      height: 40px;
+      font-size: 28px;
+      color: #555;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50%;
+      font-weight: 800;
+
+    }
+
+    ul li span:hover {
+      background: #edeef0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="todo-app">
+      <h2>To-do list <img src="./images/icon.png" alt=""></h2>
+      <div class="row">
+        <input type="text" id="inputbox" placeholder="Enter the text">
+        <button onclick="addTask()">Add</button>
+      </div>
+      <ul id="list-container">
+        <!-- <li class="checked">Tast 1</li>
+        <li>Tast 2</li>
+        <li>Tast 3</li>
+        <li>Tast 4</li> -->
+      </ul>
+    </div>
+  </div>
+  <script>
+    const inputBox = document.getElementById("inputbox")
+    const ListCont = document.getElementById("list-container")
+    function addTask() {
+      if (inputBox.value === "") {
+        alert("You must write something!")
+      }
+      else {
+        let li = document.createElement("li")
+        li.innerHTML = inputBox.value
+        ListCont.appendChild(li)
+        let span = document.createElement("span")
+        span.innerHTML = "\u00d7"
+        li.appendChild(span)
+      }
+      inputBox.value = "";
+      saveData()
+    }
+    ListCont.addEventListener("click", function (e) {
+      if (e.target.tagName === "LI") {
+        e.target.classList.toggle("checked")
+        saveData()
+      } else if (e.target.tagName === "SPAN") {
+        e.target.parentElement.remove()
+        saveData()
+      }
+    }, false)
+    function saveData() {
+      localStorage.setItem("data", ListCont.innerHTML)
+    }
+    function showTask() {
+      ListCont.innerHTML = localStorage.getItem("data")
+    }
+    showTask()
+  </script>
+</body>
+
+</html>
