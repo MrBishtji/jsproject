@@ -63,9 +63,9 @@ function validateMessage() {
 function validateForm() {
   if (
     !validateName() ||
+    !validatePhone() ||
     !validateEmail() ||
-    !validateMessage() ||
-    !validatePhone()
+    !validateMessage()
   ) {
     submitError.style.display = "block";
     submitError.innerHTML = "Please fill above form.";
