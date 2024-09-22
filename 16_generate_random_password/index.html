@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <title>Random Password</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Generate a</h1>
+    <h1 class="pass">Random Password</h1>
+    <div class="generate">
+      <input type="text" id="creatpass" placeholder="Password"><i class="ri-file-copy-line copy"></i>
+    </div>
+    <button onclick="creatPassword()"><i class="ri-flashlight-line"></i> Generate Password</button>
+  </div>
+  <script>
+    const passwordbox = document.getElementById("creatpass")
+    const lenght = 12;
+    const upperCase = "ABCDEFGHIGKLMNOPQRSTUVWXYZ"
+    const lowerCase = "abcdefghijklmnopqrstuvwxyz"
+    const number = "0123456789"
+    const symbol = "@#$%^&*()-~+|{}[]/*=_><"
+
+    const allChars = upperCase + lowerCase + number + symbol
+
+    function creatPassword() {
+      let password = "";
+      password += upperCase[Math.floor(Math.random() * upperCase.length)];
+      password += lowerCase[Math.floor(Math.random() * lowerCase.length)]
+      password += number[Math.floor(Math.random() * number.length)]
+      password += symbol[Math.floor(Math.random() * symbol.length)]
+
+      while (lenght > password.length) {
+        password += allChars[Math.floor(Math.random() * allChars.length)]
+      }
+      passwordbox.value = password;
+
+    }
+
+    // below both code work same
+    //add onclick input i tag
+    // function copyPassword() {
+    //   passwordbox.select()
+    //   document.execCommand("copy")
+    // }
+    let copypass = document.querySelector(".copy")
+    copypass.addEventListener("click", () => {
+      passwordbox.select()
+      document.execCommand("copy")
+    })
+  </script>
+</body>
+
+</html>
