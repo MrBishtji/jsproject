@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(140deg, green, yellow);
+      color: #fff;
+      padding: 10px;
+    }
+
+    .calculator {
+      width: 90%;
+      max-width: 600px;
+      margin-top: 10%;
+      margin-left: 10%;
+    }
+
+    .calculator h1 {
+      font-size: 60px;
+    }
+
+
+    .calculator h1 span {
+      color: #fedd04;
+    }
+
+    .inbox {
+      margin: 40px 0;
+      padding: 35px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+    }
+
+    .inbox input {
+      flex: 1;
+      margin-right: 20px;
+      padding: 14px 20px;
+      border: 0;
+      outline: 0;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+
+    }
+
+
+    .inbox button {
+      padding: 15px 30px;
+      border: 0;
+      outline: 0;
+      background: #15ff00;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .inbox button:hover {
+      background: #5def13e7;
+    }
+
+    #result {
+      font-size: 20px;
+    }
+
+    #result span {
+      color: red;
+    }
+
+    /* .inbox input::-webkit-calender-picker-indicator {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: auto;
+      position: absolute;
+      background-position: calc(100%-10px);
+      background-size: 30px;
+      cursor: pointer;
+    } */
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="calculator">
+      <h1>JavaScript <br><span> Age Calculator</span></h1>
+      <div class="inbox">
+        <input type="date" id="date">
+        <button onclick="Agecalculator()">Calculate</button>
+      </div>
+      <p id="result">You are <span id="years">0</span> years, <span id="months">0</span> months and <span
+          id="days">0</span> days
+        old.
+      </p>
+    </div>
+  </div>
+  <script>
+    let dateInput = document.getElementById('date');
+    let result = document.getElementById("result")
+
+    let setdata = document.getElementById("days")
+    let setmonth = document.getElementById("months")
+    let setyear = document.getElementById("years")
+    dateInput.addEventListener('click', function () {
+      this.showPicker();  // Opens date picker on click
+    });
+    dateInput.max = new Date().toISOString().split("T")[0];
+
+    function Agecalculator() {
+      let brithDate = new Date(dateInput.value);
+      let d1 = brithDate.getDate();
+      let m1 = brithDate.getMonth() + 1;
+      let y1 = brithDate.getFullYear();
+
+      let today = new Date();
+      // console.log(today);
+      let d2 = today.getDate()
+      let m2 = today.getMonth() + 1;
+      let y2 = today.getFullYear()
+
+      let d3, m3, y3;
+      y3 = y2 - y1;
+      if (m2 >= m1) {
+        m3 = m2 - m1;
+      } else {
+        y3--;
+        m3 = 12 + m2 - m1;//(13-10-2002-)(13-12-2024)=0-10-11
+      }
+      if (d2 >= d1) {
+        d3 = d2 - d1;
+      }
+      else {
+        m3--;
+        d3 = getDaysinMonth(y1, m1) + d2 - d1;
+      }
+      if (m3 < 0) {
+        m3 = 11;
+        y3--;
+      }
+      result.innerHTML = `You are ${y3} years, ${m3} months and ${d3} days old`
+    }
+    function getDaysinMonth(year, month) {
+      return new Date(year, month, 0).getDate()
+    }
+  </script>
+</body>
+
+</html>
