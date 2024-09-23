@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show and Hide Password</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* background: linear-gradient(130deg, black, red); */
+      background: #4949dd;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 400px;
+      background: #fff;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin: 250px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container input {
+      border: 0;
+      outline: 0;
+      font-size: 24px;
+      width: 100%;
+      padding: 10px;
+      color: #554;
+    }
+
+    .container #eyeimg {
+      width: 40px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <input type="password" id="password" placeholder="Password">
+    <img src="eye-off-fill.png" id="eyeimg" class="img" alt="">
+  </div>
+  <script>
+    let password = document.getElementById("password")
+    let imgicon = document.getElementById("eyeimg")
+    imgicon.addEventListener("click", () => {
+      if (password.type == "password") {
+        password.type = "text";
+        imgicon.src = "eye-fill.png";
+      } else {
+        password.type = "password";
+        imgicon.src = "eye-off-fill.png";
+      }
+    })
+
+  </script>
+</body>
+
+</html>
