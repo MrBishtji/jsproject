@@ -75,11 +75,12 @@
     }
 
     #result {
-      font-size: 20px;
+      font-size: 25px;
     }
 
     #result span {
       color: red;
+      font-weight: 700;
     }
 
     /* .inbox input::-webkit-calender-picker-indicator {
@@ -105,9 +106,7 @@
         <input type="date" id="date">
         <button onclick="Agecalculator()">Calculate</button>
       </div>
-      <p id="result">You are <span id="years">0</span> years, <span id="months">0</span> months and <span
-          id="days">0</span> days
-        old.
+      <p id="result">You are <span>0</span> years, <span>0</span> months and <span>0</span> days old
       </p>
     </div>
   </div>
@@ -115,9 +114,6 @@
     let dateInput = document.getElementById('date');
     let result = document.getElementById("result")
 
-    let setdata = document.getElementById("days")
-    let setmonth = document.getElementById("months")
-    let setyear = document.getElementById("years")
     dateInput.addEventListener('click', function () {
       this.showPicker();  // Opens date picker on click
     });
@@ -154,7 +150,7 @@
         m3 = 11;
         y3--;
       }
-      result.innerHTML = `You are ${y3} years, ${m3} months and ${d3} days old`
+      result.innerHTML = `You are <span>${y3}</span> years, <span>${m3}</span> months and <span>${d3}</span> days old`
     }
     function getDaysinMonth(year, month) {
       return new Date(year, month, 0).getDate()
