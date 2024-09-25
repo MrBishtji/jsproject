@@ -12,9 +12,9 @@
       box-sizing: border-box;
     }
 
+
     body {
-      /* background: linear-gradient(130deg, black, red); */
-      background: #4949dd;
+      background: #07070e;
     }
 
     .container {
@@ -23,10 +23,15 @@
       background: #fff;
       border-radius: 5px;
       padding: 10px 20px;
-      margin: 250px auto;
+      margin: 50px auto;
       display: flex;
       justify-content: center;
       align-items: center;
+
+    }
+
+    .container:hover {
+      box-shadow: -1px 0px 17px 12px #31e5ff9e;
     }
 
     .container input {
@@ -42,10 +47,21 @@
       width: 40px;
       cursor: pointer;
     }
+
+    h1 {
+      text-align: center;
+      margin-top: 150px;
+      font-size: 35px;
+      color: #fff;
+      text-shadow:
+        2px 3px 10px red, 0px -1px 8px blue;
+      font-weight: 900;
+    }
   </style>
 </head>
 
 <body>
+  <h1>Hide and Show Password</h1>
   <div class="container">
     <input type="password" id="password" placeholder="Password">
     <img src="eye-off-fill.png" id="eyeimg" class="img" alt="">
