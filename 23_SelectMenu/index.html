@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Menu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(130deg, red, green);
+    }
+
+    .selector {
+      width: 350px;
+    }
+
+    #selectfield {
+      width: 100%;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #selectfield img {
+      width: 12px;
+      transition: transform 0.5s;
+    }
+
+    #list {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .options {
+      width: 100%;
+      padding: 15px 0 15px 70px;
+      list-style: none;
+      cursor: pointer;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .options img {
+      width: 25px;
+      position: absolute;
+      top: 12px;
+      left: 25px;
+    }
+
+    .options:hover {
+      background: rgba(255, 255, 255, 0.7);
+
+    }
+
+    .hide {
+      visibility: hidden;
+    }
+
+    .rotate {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="selector">
+      <div id="selectfield">
+        <p id="selectetext">Select Social Media</p>
+        <img src="SelectMenu_Img/arrow.png" id="arrowIcon" alt="">
+      </div>
+      <ul id="list" class="hide">
+        <li class="options">
+          <img src="SelectMenu_Img/facebook.png" alt="">
+          <p>Facebook</p>
+        </li>
+        <li class="options">
+          <img src="SelectMenu_Img/instagram.png" alt="">
+          <p>Instagram</p>
+        </li>
+        <li class="options">
+          <img src="SelectMenu_Img/pinterest.png" alt="">
+          <p>Pinterest</p>
+        </li>
+        <li class="options">
+          <img src="SelectMenu_Img/twitter.png" alt="">
+          <p>Twitter</p>
+        </li>
+        <li class="options">
+          <img src="SelectMenu_Img/youtube.png" alt="">
+          <p>Youtube</p>
+        </li>
+        <li class="options">
+          <img src="SelectMenu_Img/whatsapp.png" alt="">
+          <p>Whatsapp</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+  <script>
+    let selectfield = document.getElementById("selectfield")
+    let selectetext = document.getElementById("selectetext")
+    let options = document.getElementsByClassName("options")
+    let list = document.getElementById("list")
+    let ArrowIcon = document.getElementById("arrowIcon")
+    selectfield.onclick = function () {
+      list.classList.toggle("hide");
+      ArrowIcon.classList.toggle("rotate")
+    }
+    for (option of options) {
+      option.onclick = function () {
+        selectetext.innerHTML = this.textContent;
+        list.classList.toggle("hide");
+        ArrowIcon.classList.toggle("rotate")
+      }
+    }
+  </script>
+</body>
+
+</html>
