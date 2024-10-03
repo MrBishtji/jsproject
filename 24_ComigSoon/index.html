@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comig Soon Website</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      height: 100vh;
+      background-image: url("images/bg.jpg");
+      background-size: cover;
+      background-position: center;
+      padding: 0 8%;
+      position: relative;
+    }
+
+    .logo {
+      width: 120px;
+      padding: 20px 0;
+      cursor: pointer;
+    }
+
+    .content {
+      top: 50%;
+      position: absolute;
+      transform: translateY(-50%);
+      color: #fff;
+    }
+
+    .content h1 {
+      font-size: 58px;
+      font-weight: 600;
+    }
+
+    .content h1 span {
+      color: #d93636;
+    }
+
+    .content input {
+      margin-top: 30px;
+      width: 300px;
+      padding: 12px;
+      border: 2px solid #820f0f;
+      outline: 0;
+      border-radius: 5px;
+      background: #f8f8f8;
+    }
+
+    .content #notify {
+      margin: 30px;
+      background: transparent;
+      padding: 12px 25px;
+      border: 2px solid #ec1717;
+      border-radius: 5px;
+      color: #fff;
+    }
+
+    .content #notify:hover {
+      background: #ffffff22;
+      cursor: pointer;
+    }
+
+    .content #button {
+      background: transparent;
+      padding: 12px 25px;
+      border: 2px solid #f11e1e;
+      outline: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+
+    .content button img {
+      width: 15px;
+      margin-left: 10px;
+    }
+
+    .launch-time {
+      display: flex;
+    }
+
+    .launch-time div {
+      flex-basis: 100px;
+    }
+
+    .launch-time div p {
+      font-size: 55px;
+      margin-bottom: 5px;
+    }
+
+    .rocket {
+      width: 250px;
+      position: absolute;
+      right: 10%;
+      bottom: 0;
+      animation: rocket 4s linear infinite
+    }
+
+    @keyframes rocket {
+      0% {
+        bottom: 0;
+        opacity: 0;
+      }
+
+      100% {
+        bottom: 100%;
+        opacity: 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img class="logo" src="images/logo.png" alt="" />
+    <div class="content">
+      <p>Website Is Under Maintenance</p>
+      <h1>We're <span> Launcing</span> Soon</h1>
+      <div class="launch-time">
+        <div>
+          <p id="day">00</p>
+          <span>Days</span>
+        </div>
+        <div>
+          <p id="hours">00</p>
+          <span>Hours</span>
+        </div>
+        <div>
+          <p id="minutes">00</p>
+          <span>Minutes</span>
+        </div>
+        <div>
+          <p id="sec">00</p>
+          <span>Seconds</span>
+        </div>
+      </div>
+      <input type="email" id="email" placeholder="Enter Your Email" />
+      <button type="submit" id="notify">Notify Me</button>
+      <button type="button" id="button">Learn More <img src="images/triangle.png" alt=""></button>
+    </div>
+    <img src="images/rocket.png" class="rocket" alt="">
+  </div>
+  <script>
+    var countDownDate = new Date("Oct 30,2024 00:00:00").getTime();
+
+    var x = setInterval(function () {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      let day = document.getElementById("day").innerHTML = days
+      let hour = document.getElementById("hours").innerHTML = hours
+      let Mint = document.getElementById("minutes").innerHTML = minutes
+      let sec = document.getElementById("sec").innerHTML = seconds
+
+      if (distance < 0) {
+        clearInterval(x);
+        let day = document.getElementById("day").innerHTML = "00"
+        let hour = document.getElementById("hours").innerHTML = "00"
+        let Mint = document.getElementById("minutes").innerHTML = "00"
+        let sec = document.getElementById("sec").innerHTML = "00"
+
+      }
+
+    }, 1000)
+  </script>
+</body>
+
+</html>
