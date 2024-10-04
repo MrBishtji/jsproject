@@ -1,0 +1,95 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cursor</title>
+  <style>
+    body {
+      height: 100vh;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      font-size: 4rem;
+      font-family: 'Playfair Display SC', serif;
+    }
+
+
+    /* JavaScript */
+    div.cursor {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      background: yellow;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: cursor 6s infinite alternate;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor"></div>
+  <div class="container">
+    <h1 class="head">Multi Color Mouse Cursor Project</h1>
+  </div>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    let title = document.querySelector(".head")
+
+    // an array of 10 colors in hex value
+    const colors = [
+      '#FF6633',
+      '#FFB399',
+      '#FF33FF',
+      '#FFFF99',
+      '#00B3E6',
+      '#E6B333',
+      '#3366E6',
+      '#999966',
+      '#99FF99',
+      '#B34D4D',
+    ];
+    // add circle to cursor and change it's color as cursor moves on the screen. Pick color from these array
+    document.addEventListener('mousemove', function (event) {
+      moveCursor(event.pageX, event.pageY);
+    });
+
+    const moveCursor = function (pageX, pageY) {
+
+      cursor.style.left = pageX + 'px';
+      cursor.style.top = pageY + 'px';
+
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+      cursor.style.backgroundColor = randomColor;
+    };
+
+    title.addEventListener('mouseenter', () => {
+
+      cursor.style.scale = "2"
+      title.style.color = "yellow"
+      title.style.fontSize = "75px"
+    });
+
+    document.addEventListener("mouseleave", () => {
+      cursor.style.scale = "1"
+      title.style.color = "#fff"
+    })
+  </script>
+</body>
+
+</html>
