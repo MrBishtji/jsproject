@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Voice</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      min-height: 100vh;
+      background: #ddeeaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    .container h1 {
+      font-size: 45px;
+      font-weight: 500;
+      margin-top: -50px;
+      margin-bottom: 50px;
+    }
+
+    .container h1 span {
+      color: #fc0303;
+    }
+
+    textarea {
+      width: 500px;
+      height: 250px;
+      background: #b7bc90;
+      border: 0;
+      outline: 0;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #fff;
+      resize: none;
+      margin-bottom: 30px;
+    }
+
+    textarea::placeholder {
+      font-size: 16px;
+      color: #eee3e3;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 500px;
+    }
+
+    .row button {
+      background: #fee887;
+      border: 0;
+      outline: 0;
+      border-radius: 35px;
+      color: #fff;
+      font-size: 20px;
+      padding: 10px 25px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      height: 45px;
+    }
+
+    .row button img {
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    .row select {
+      flex: 1;
+      color: #fff;
+      background: #456780;
+      height: 45px;
+      padding: 0 20px;
+      border: 0;
+      outline: 0;
+      border-radius: 35px;
+      appearance: none;
+      background-image: url(./arrow-drop-down.png);
+      background-repeat: no-repeat;
+      background-position-x: calc(100% - 15px);
+      background-position-y: 10px;
+      background-size: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Text To Speech <span>Convertor</span></h1>
+    <textarea placeholder="write anything here..." id="typetext">
+
+
+    </textarea>
+    <div class="row">
+      <select></select>
+      <button> <img src="play-fill.png" alt="">listen</button>
+    </div>
+  </div>
+  <script>
+    let speech = new SpeechSynthesisUtterance()
+    let Voice = []
+
+    let voiceSelect = document.querySelector("select")
+
+    window.speechSynthesis.onvoiceschanged = () => {
+      Voices = window.speechSynthesis.getVoices();
+      speech.voice = Voices[0]
+
+      Voices.forEach((Voice, i) => (voiceSelect.options[i] = new Option(Voice.name, i)));
+    }
+    voiceSelect.addEventListener("change", () => {
+      speech.voice = Voices[voiceSelect.value]
+    })
+    document.querySelector("button").addEventListener(
+      "click", () => {
+        speech.text = document.querySelector("textarea").value;
+        window.speechSynthesis.speak(speech)
+      }
+    )
+  </script>
+</body>
+</html>
