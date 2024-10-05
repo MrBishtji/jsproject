@@ -42,6 +42,8 @@
     let ChangeMode = document.querySelector(".mode")
     let ChangeImg = document.querySelector(".imagechange")
 
+
+    //way1
     function changetheme() {
       ChangeMode.classList.toggle("change")
       if (ChangeMode.classList.contains("change")) {
@@ -51,39 +53,42 @@
       }
     }
 
-    // ChangeImg.onclick = function () {
-    //   ChangeMode.classList.toggle("change")
-    //   if (ChangeMode.classList.contains("change")) {
-    //     ChangeImg.src = "./theme icon/sun.png"
-    //   } else {
-    //     ChangeImg.src = "./theme icon/moon.png"
-    //   }
-    // }
+    //way2
+  // ChangeImg.onclick = function () {
+  //   ChangeMode.classList.toggle("change")
+  //   if (ChangeMode.classList.contains("change")) {
+  //     ChangeImg.src = "./theme icon/sun.png"
+  //   } else {
+  //     ChangeImg.src = "./theme icon/moon.png"
+  //   }
+  // }
 
-    // ChangeImg.addEventListener("click", () => {
-    //   ChangeMode.classList.toggle("change")
-    //   if (ChangeMode.classList.contains("change")) {
-    //     ChangeImg.src = "./theme icon/sun.png"
-    //   } else {
-    //     ChangeImg.src = "./theme icon/moon.png"
-    //   }
-    // })
+  //way 3
+  // ChangeImg.addEventListener("click", () => {
+  //   ChangeMode.classList.toggle("change")
+  //   if (ChangeMode.classList.contains("change")) {
+  //     ChangeImg.src = "./theme icon/sun.png"
+  //   } else {
+  //     ChangeImg.src = "./theme icon/moon.png"
+  //   }
+  // })
 
-    // function changbg(type, selector, callbox) {
-    //   ChangeImg.addEventListener(type, e => {
-    //     if (e.target.matches(selector)) {
-    //       callbox()
-    //     }
-    //   })
-    // }
-    // changbg("click", ".imagechange", () => {
-    //   ChangeMode.classList.toggle("change")
-    //   if (ChangeMode.classList.contains("change")) {
-    //     ChangeImg.src = "./theme icon/sun.png"
-    //   } else {
-    //     ChangeImg.src = "./theme icon/moon.png"
-    //   }
-    // })
+  //way 4
+  // function changbg(type, selector, callbox) {
+  //   ChangeImg.addEventListener(type, e => {
+  //     if (e.target.matches(selector)) {
+  //       callbox()
+  //     }
+  //   })
+  // }
+  // changbg("click", ".imagechange", () => {
+  //   ChangeMode.classList.toggle("change")
+  //   if (ChangeMode.classList.contains("change")) {
+  //     ChangeImg.src = "./theme icon/sun.png"
+  //   } else {
+  //     ChangeImg.src = "./theme icon/moon.png"
+  //   }
+  // })
 
   </script>
 </body>
