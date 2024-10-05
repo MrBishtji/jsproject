@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote of the Day</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Playfair Display", serif;
+
+    }
+
+    body {
+      background: #ff3399;
+    }
+
+    .quote-box {
+      background: #fff;
+      width: 700px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.17)
+    }
+
+    .quote-box h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .quote-box h2::after {
+      content: "";
+      height: 4px;
+      width: 75px;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 3px;
+      background-color: red;
+    }
+
+    .quote-box blockquote {
+      font-size: 26px;
+      min-height: 110px;
+    }
+
+    .quote-box blockquote::before,
+    .quote-box blockquote::after {
+      content: '"';
+    }
+
+    .quote-box span {
+      display: block;
+      margin-top: 10px;
+      float: right;
+      position: relative;
+      font-weight: 600;
+      font-size: 25px;
+    }
+
+    .quote-box span::before {
+      content: "";
+      width: 20px;
+      height: 2px;
+      position: absolute;
+      left: -30px;
+      top: 50%;
+      background-color: #3f3f3f;
+    }
+
+    .quote-box div {
+      width: 100%;
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .quote-box button {
+      background: #e54e99f1;
+      color: #fff;
+      border-radius: 25px;
+      border: 2px solid #ca3c98;
+      width: 150px;
+      height: 50px;
+      display: flex;
+      font-size: 15px;
+      align-items: center;
+      justify-content: center;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .quote-box button img {
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    .quote-box button:nth-child(1):hover {
+      background-color: #ff3399;
+
+    }
+
+    .quote-box button:nth-child(2) {
+      background: transparent;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quote-box">
+    <h2>Quote of the day</h2>
+    <blockquote id="quotes">Loading...</blockquote>
+    <span id="autthor">Loading...</span>
+    <div>
+      <button id="changeQuote" onclick="Quote(quote_url)">New Quote</button>
+      <button onclick="tweet()"><img src="twitter-fill.png" alt="">Tweet</button>
+    </div>
+  </div>
+  <script>
+    const quote_url = "https://api.quotable.io/random";
+    let autthorName = document.getElementById("autthor")
+    let SetQuotes = document.getElementById("quotes")
+    let ChangeQuote = document.getElementById("chnageQuote")
+
+    async function Quote(url) {
+      const response = await fetch(url);
+      var data = await response.json()
+      SetQuotes.innerHTML = data.content;
+      autthorName.innerHTML = data.author
+
+    }
+    function tweet() {
+      window.open("https://twitter.com/intent/tweet?text=" + SetQuotes.innerHTML + "----by " + autthorName.innerHTML, "tweet window", "width=600,height=300")
+    }
+    Quote(quote_url)
+  </script>
+</body>
+
+</html>
