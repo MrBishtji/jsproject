@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation Progress Bar</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #203447;
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      color: #fff;
+    }
+
+    .progress {
+      width: 200px;
+      height: 200px;
+      /* background: linear-gradient(50deg,blue,skyblue); */
+      position: relative;
+    }
+
+    .outer {
+      height: 200px;
+      width: 200px;
+      border-radius: 50%;
+      padding: 20px;
+      box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+        -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+
+    }
+
+    .inner {
+      height: 160px;
+      width: 160px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 4px 4px 4px -1px rgba(0, 0, 0, 0.15),
+        inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+        -0.5px 0.5px 0px rgba(255, 255, 255, 1),
+        0.5px 0.5px 0px rgba(0, 0, 0, 0.15),
+        0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+    }
+
+    #number {
+      font-weight: 700;
+      font-size: 30px;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    circle {
+      fill: none;
+      stroke: url(#GradientColor);
+      stroke-width: 20px;
+      stroke-dasharray: 550;
+      stroke-dashoffset: 550;
+      animation: anim 2s linear forwards;
+    }
+
+    @keyframes anim {
+      100% {
+        stroke-dashoffset: 160;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Progress Bar</h1>
+  <div class="progress">
+    <div class="outer">
+      <div class="inner">
+        <div id="number">
+
+        </div>
+      </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="200px" height="200px">
+      <defs>
+        <linearGradient id="GradientColor">
+          <stop offset="0%" stop-color="#13ef5f" />
+          <stop offset="100%" stop-color="#c4f30b" />
+        </linearGradient>
+      </defs>
+      <circle cx="100" cy="100" r="90" stroke-linecap="round" />
+    </svg>
+
+  </div>
+  <script>
+    let number = document.getElementById("number")
+    let counter = 0;
+    setInterval(() => {
+      if (counter == 70) {
+        clearInterval()
+      }
+      else {
+        counter += 1;
+        number.innerHTML = counter + "%"
+      }
+    }, 30)
+  </script>
+</body>
+
+</html>
