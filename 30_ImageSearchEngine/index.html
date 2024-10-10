@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Search Engine</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #060e05;
+      color: #fff;
+
+    }
+
+    h1 {
+      text-align: center;
+      margin: 100px auto 50px;
+      font-weight: 600;
+    }
+
+    form {
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      height: 80px;
+      background: #261b564b;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+    }
+
+    form input {
+      padding: 0 20px;
+      flex: 1;
+      height: 100%;
+      border: none;
+      background: transparent;
+      outline: 0;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    form button {
+      height: 100%;
+      padding: 0 40px;
+      font-size: 18px;
+      font-weight: 700;
+      border: 0;
+      outline: 0;
+      background: #021bfa;
+      color: #fff;
+      cursor: pointer;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    ::placeholder {
+      color: #fff;
+      font-size: 18px;
+    }
+
+    #show-more-btn {
+      background: #5824f5;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 18px;
+      outline: 0;
+      border: 0;
+      margin: 10px auto 100px;
+      display: none;
+    }
+
+    #search-result {
+      width: 80%;
+      margin: 100px auto 50px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 40px;
+
+
+    }
+
+    #search-result img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Image Search Engine</h1>
+  <form id="search-form">
+    <input type="text" id="search-box" placeholder="Search anything image here......">
+    <button>Search</button>
+
+  </form>
+  <div id="search-result"></div>
+  <button id="show-more-btn">Show more</button>
+
+  <script>
+    const AccessKeyAPI = "riq_saj1GpcJjXtWAQdzrKQGPztNtONbYywXaY3hvjw"
+    let searchFrom = document.getElementById("search-form")
+    let searchBox = document.getElementById("search-box")
+    let searchResult = document.getElementById("search-result")
+    let ShowMore = document.getElementById("show-more-btn")
+
+    let keyword = "";
+    let page = 1;
+
+    async function SearchImage() {
+      keyword = searchBox.value;
+      const url = `https://api.unsplash.com/search/collections?page=${page}&query=${keyword}&client_id=${AccessKeyAPI}&per_page=12`;
+      const response = await fetch(url)
+      const data = await response.json()
+
+      if (page == 1) {
+        searchResult.innerHTML = ""
+      }
+      const results = data.results;
+
+      results.map((result) => {
+        const image = document.createElement("img")
+        image.src = result.cover_photo.urls.small;
+        const ImageLinks = document.createElement("a")
+        ImageLinks.href = result.links.html
+        ImageLinks.target = "_blank";
+
+        ImageLinks.appendChild(image)
+        searchResult.appendChild(ImageLinks)
+      })
+      ShowMore.style.display = "block"
+
+    }
+    searchFrom.addEventListener("submit", (e) => {
+      e.preventDefault()
+      page = 1
+      SearchImage()
+    })
+    ShowMore.addEventListener("click", () => {
+      page++
+      SearchImage()
+    })
+  </script>
+</body>
+
+</html>
