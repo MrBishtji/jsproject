@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flash light Effect</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      cursor: none;
+      
+    }
+  p {
+      font-size: 1em;
+      text-align: justify;
+      line-height: 1.8em;
+      padding: 0.2em;
+    }
+
+    #flash-card {
+      --Xpos: 50vw;
+      --Ypos: 50vh
+    }
+
+    #flash-card::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      pointer-events: none;
+      background: radial-gradient(circle 9em at var(--Xpos) var(--Ypos),
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 1));
+    }
+
+    @media screen and (max-width:500px) {
+      body {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="flash-card"></div>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque accusamus excepturi sit fugit quaerat? Quia debitis
+    incidunt dolor nisi repellat repellendus aut? Eius porro nam eveniet nisi ut, labore expedita.
+    Illum quo adipisci rerum veritatis corporis fugiat distinctio inventore dolore asperiores aliquid eos suscipit aut
+    quam eum fugit fuga enim, repudiandae amet, magni quidem hic soluta quis sequi. In, aperiam?
+    Molestiae, molestias voluptatum temporibus hic alias sequi impedit, iusto perferendis praesentium nihil numquam
+    voluptates dolorem, porro nam magni! Cumque optio corporis, velit harum nulla corrupti maiores id aliquid excepturi
+    totam!</p>
+  <p>
+    Voluptatum pariatur ipsam facilis? Amet nisi temporibus quis aliquam quam! Consectetur libero, laudantium illo
+    quisquam natus dolor exercitationem tenetur! At, inventore repellat pariatur cumque cum sunt. Dolore cupiditate
+    velit temporibus.
+    Neque, temporibus. Ad reiciendis vel repellendus officiis odit necessitatibus quos beatae culpa, aliquam molestias
+    consectetur dolorem excepturi quod fuga praesentium eum expedita id minus modi ducimus. Vero nam magnam sed.</p>
+  <p>
+    Voluptatum pariatur ipsam facilis? Amet nisi temporibus quis aliquam quam! Consectetur libero, laudantium illo
+    quisquam natus dolor exercitationem tenetur! At, inventore repellat pariatur cumque cum sunt. Dolore cupiditate
+    velit temporibus.
+    Neque, temporibus. Ad reiciendis vel repellendus officiis odit necessitatibus quos beatae culpa, aliquam molestias
+    consectetur dolorem excepturi quod fuga praesentium eum expedita id minus modi ducimus. Vero nam magnam sed.</p>
+  <p>
+    Voluptatum pariatur ipsam facilis? Amet nisi temporibus quis aliquam quam! Consectetur libero, laudantium illo
+    quisquam natus dolor exercitationem tenetur! At, inventore repellat pariatur cumque cum sunt. Dolore cupiditate
+    velit temporibus.
+    Neque, temporibus. Ad reiciendis vel repellendus officiis odit necessitatibus quos beatae culpa, aliquam molestias
+    consectetur dolorem excepturi quod fuga praesentium eum expedita id minus modi ducimus. Vero nam magnam sed.</p>
+  <p>
+    Voluptatum pariatur ipsam facilis? Amet nisi temporibus quis aliquam quam! Consectetur libero, laudantium illo
+    quisquam natus dolor exercitationem tenetur! At, inventore repellat pariatur cumque cum sunt. Dolore cupiditate
+    velit temporibus.
+    Neque, temporibus. Ad reiciendis vel repellendus officiis odit necessitatibus quos beatae culpa, aliquam</p>
+  
+
+  <script>
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let flashLight = document.getElementById("flash-card");
+
+    const isTouchDevice = () => {
+      try {
+        document.createEvent("TouchEvent");
+        return true
+      } catch (e) {
+        return false;
+      }
+    };
+    function getMousePosition(e) {
+      mouseX = !isTouchDevice() ? e.pageX : e.touches[0].pageX;
+      mouseY = !isTouchDevice() ? e.pageY : e.touches.pageY;
+
+      flashLight.style.setProperty("--Xpos", mouseX + "px")
+      flashLight.style.setProperty("--Ypos", mouseY + "px")
+    }
+
+    document.addEventListener("mousemove", getMousePosition)
+    document.addEventListener("touchmove", getMousePosition)
+
+  </script>
+</body>
+
+</html>
