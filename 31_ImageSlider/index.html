@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <title>Image Slider</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eaeaea;
+      overflow: hidden;
+      /* position: relative; */
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      /* max-width: 600px; */
+      height: 100vh;
+      background: #f5f5f5;
+      box-shadow: 0 30px 50px #dbdbdb;
+    }
+
+    .container .slide .item {
+      width: 200px;
+      height: 300px;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      border-radius: 20px;
+      box-shadow: 0 30px 50px #505050;
+      background-position: 50% 50%;
+      background-size: cover;
+      display: inline-block;
+      transition: 0.5s;
+    }
+
+    .item1 {
+      background-image: url("https://images.pexels.com/photos/16634038/pexels-photo-16634038/free-photo-of-alpine-landscape-with-snowcapped-mountains-and-a-green-valley-with-pink-flowers.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    }
+
+    .item2 {
+      background-image: url("https://images.pexels.com/photos/225203/pexels-photo-225203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    }
+
+    .slide .item:nth-child(1),
+    .slide .item:nth-child(2) {
+      top: 0;
+      left: 0;
+      transform: translate(0, 0);
+      border-radius: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide .item:nth-child(3) {
+      left: 35%;
+    }
+
+    .slide .item:nth-child(4) {
+      left: calc(56%);
+    }
+
+    .slide .item:nth-child(5) {
+      left: calc(77%);
+    }
+
+    .slide .item:nth-child(n+6) {
+      left: calc(95%);
+      opacity: 0;
+    }
+
+    .item .content {
+      position: absolute;
+      top: 50%;
+      left: 35px;
+      width: 200px;
+      text-align: left;
+      color: #fff;
+      transform: translate(0, -50%);
+      font-family: system-ui;
+      display: none;
+    }
+
+    .slide .item:nth-child(2) .content {
+      display: block;
+    }
+
+    .content .name {
+      font-size: 40px;
+      text-transform: uppercase;
+      font-weight: bold;
+      opacity: 0;
+      animation: animate 1s ease-in-out 1 forwards;
+    }
+
+    .content .details {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: animate 1s ease-in-out 0.3s 1 forwards;
+
+    }
+
+    .content button {
+      padding: 10px 20px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 18px;
+      opacity: 0;
+      animation: animate 1s ease-in-out 0.6s 1 forwards;
+background: #2ed8149e;
+border-radius: 10px;
+color: #fff;
+    }
+
+    @keyframes animate {
+      from {
+        opacity: 0;
+        transform: translate(0, 100px);
+        filter: blur(33px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(0);
+        filter: blur(0);
+      }
+    }
+
+    .item3 {
+      background-image: url("https://images.pexels.com/photos/457876/pexels-photo-457876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+      /* left: 50%; */
+    }
+
+    .item4 {
+      background-image: url("https://images.pexels.com/photos/28893485/pexels-photo-28893485/free-photo-of-charming-red-houses-amidst-swedish-autumn-foliage.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+      left: calc(50%+220px);
+    }
+
+    .item5 {
+      background-image: url("https://images.pexels.com/photos/186985/pexels-photo-186985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+      /* left: calc(50%+440px); */
+    }
+
+    .item6 {
+      background-image: url("https://images.pexels.com/photos/28900613/pexels-photo-28900613/free-photo-of-aerial-view-of-autumn-forest-by-tyrol-lake.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    }
+
+    .button {
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      bottom: 20px;
+
+    }
+
+    .button button {
+      width: 40px;
+      height: 35px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin: 0 5px;
+      transition: 0.3s;
+      border: 1px solid #000;
+    }
+
+    .button button:hover {
+      background: #ababab;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="slide">
+      <div class="item item1">
+        <div class="content">
+          <div class="name">France</div>
+          <div class="details">Saint-Christophe-en-Oisans</div>
+          <button>See More</button>
+        </div>
+      </div>
+      <div class="item item2">
+        <div class="content">
+          <div class="name">Bulgaria</div>
+          <div class="details">Green Mountain Surrounded by Body of Water Photo</div>
+          <button>See More</button>
+        </div>
+      </div>
+      <div class="item item3">
+        <div class="content">
+          <div class="name">Maldive</div>
+          <div class="details">Green Coconut Trees</div>
+          <button>See More</button>
+        </div>
+      </div>
+      <div class="item item4">
+        <div class="content">
+          <div class="name">Sweden</div>
+          <div class="details">Charming Red Houses Amidst Swedish Autumn Foliage
+          </div>
+          <button>See More</button>
+        </div>
+      </div>
+      <div class="item item5">
+        <div class="content">
+          <div class="name">Pakistan</div>
+          <div class="details">Green Mountain Distance With Trees in Khyber Pakhtunkhwa</div>
+          <button>See More</button>
+        </div>
+      </div>
+      <div class="item item6">
+        <div class="content">
+          <div class="name">Austria</div>
+          <div class="details">Aerial View of Autumn Forest by Tyrol Lake
+          </div>
+          <button>See More</button>
+        </div>
+      </div>
+    </div>
+    <div class="button">
+      <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+      <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+  <script>
+    let next = document.querySelector(".next")
+    let prev = document.querySelector(".prev")
+    next.addEventListener("click", () => {
+      let items = document.querySelectorAll(".item")
+      document.querySelector(".slide").appendChild(items[0])
+    })
+    prev.addEventListener("click", () => {
+      let items = document.querySelectorAll(".item")
+      document.querySelector(".slide").prepend(items[items.length - 1])
+    })
+  </script>
+</body>
+
+</html>
