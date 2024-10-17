@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analog Clock</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to top, #000, #0000ff);
+      position: relative;
+    }
+
+    .clock {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      border: 10px solid rgba(112, 110, 110, 0.714);
+      background-color: #000;
+      /* border-radius: 50%;
+      box-shadow: 2px 3px 8px 1px green,
+              inset  5px 4px 10px rgb(1, 25, 181)
+      ; */
+    }
+
+    .hand {
+      position: absolute;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 5px;
+      margin: auto;
+      transform-origin: bottom;
+    }
+
+    .hour {
+      height: 60px;
+      width: 10px;
+      top: 100px;
+    }
+
+    .minute {
+      height: 80px;
+      width: 5px;
+      top: 80px;
+    }
+
+    .sec {
+      height: 90px;
+      width: 3px;
+      top: 70px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clock">
+    <div class="hour hand" id="hour"></div>
+    <div class="minute hand" id="minute"></div>
+    <div class="sec hand" id="sec"></div>
+    <img class="clockimg" src="./clock_template.svg" alt="">
+  </div>
+
+  <script>
+    let changeMint = document.getElementById("minute")
+    let changeHour = document.getElementById("hour")
+    let changeSec = document.getElementById("sec")
+
+    let clockTime = setInterval(() => {
+      let date_now = new Date();
+
+      let hr = date_now.getHours()
+      let mint = date_now.getMinutes()
+      let sec = date_now.getSeconds()
+
+      let cal_hr = (hr * 30) + (mint / 2)
+      let cal_mint = (mint * 6) + (sec / 10)
+      let cal_sec = sec * 6
+
+      changeHour.style.transform = `rotate(${cal_hr}deg)`
+      changeMint.style.transform = `rotate(${cal_mint}deg)`
+      changeSec.style.transform = `rotate(${cal_sec}deg)`
+
+    }, 1000);
+    clockTime
+  </script>
+</body>
+
+</html>
