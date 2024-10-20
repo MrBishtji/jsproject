@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gradient Color Generator</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to left, #2323c6, #149cfe);
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      display: flex;
+      font-size: 15px;
+    }
+
+    .card {
+      background: #d3caca;
+      padding: 20px;
+      width: 70%;
+      max-width: 400px;
+      border-radius: 10px;
+    }
+
+    .color-box {
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      background: linear-gradient(to left top, rgb(153, 159, 255), rgb(255, 243, 51));
+    }
+
+    .propeites {
+      display: flex;
+      font-size: 18px;
+    }
+
+    .propeites p {
+      margin-bottom: 10px;
+    }
+
+    .direction {
+      margin-right: 50px;
+    }
+
+    .direction .select-box {
+      border: 1px solid #898888b7;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .direction select {
+      padding: 5px;
+      width: 100%;
+      border: none;
+      background: none;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .direction option {
+      font-weight: 600;
+    }
+
+    input[type=color] {
+      width: 65px;
+      height: 40px;
+      cursor: pointer;
+
+    }
+
+    .box {
+      width: 100%;
+      height: 60px;
+      padding: 5px;
+      background: #fff;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .btn button {
+      width: 45%;
+      padding: 15px 20px;
+      border: 0;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    #refresh {
+      background: #444444b2;
+      margin-right: 25px;
+    }
+
+    #refresh:hover {
+      background: #333;
+    }
+
+    #copyCode {
+      background: #f37070ef;
+    }
+
+    #copyCode:hover {
+      background: #ff0202;
+    }
+
+    .card textarea {
+      width: 100%;
+      padding: 10px 15px;
+      margin-top: 20px;
+      font-size: 15px;
+      color: #333;
+      resize: none;
+      border-radius: 5px;
+      border: 1px solid #817c7c;
+    }
+
+    .highlight {
+      background-color: #24ff2b;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="color-box"></div>
+    <div class="propeites">
+      <div class="direction">
+        <p>Direction</p>
+        <div class="select-box">
+          <select name="select" id="directed">
+
+            <option value="to Top">Top</option>
+
+            <option value="to Right top">Right top</option>
+
+            <option value="to Right">Right</option>
+            <option value="to Right Bottom">Right Bottom</option>
+
+            <option value="to bottom">Bottom</option>
+            <option value="to left bottom">Left Bottom</option>
+            <option value="to left">Left</option>
+            <option value="to left top            " selected>Left top</option>
+          </select>
+        </div>
+      </div>
+      <div class="colors">
+        <p>Colors</p>
+        <div class="input">
+          <input type="color" value="#999fff" id="first-color">
+          <input type="color" value="#fff333" id="sec-color">
+        </div>
+      </div>
+    </div>
+
+    <textarea class="row" disabled>background: linear-gradient(to left top,#ffffff,#333333)</textarea>
+    <div class="btn">
+      <button id="refresh">Refresh Colors</button>
+      <button id="copyCode">Copy Code</button>
+    </div>
+  </div>
+
+  <script>
+    const ColorInput = document.querySelectorAll(".colors input")
+    const ColorBox = document.querySelector(".color-box")
+    const getColorCode = document.querySelector(".row")
+    const SelectMenu = document.querySelector(".select-box select")
+    const refreshbtn = document.getElementById("refresh")
+    const copyCode = document.getElementById("copyCode")
+
+    const getRandomColor = () => {
+      const randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
+      return `#${randomHex}`;
+    }
+
+    const generateGradient = (isRandom) => {
+      if (isRandom) {
+        ColorInput[0].value = getRandomColor();
+        ColorInput[1].value = getRandomColor();
+      }
+
+      const Gradient = `linear-gradient(${SelectMenu.value},${ColorInput[0].value},${ColorInput[1].value})`
+      ColorBox.style.background = Gradient
+      getColorCode.value = `background:${Gradient};`
+    }
+    ColorInput.forEach(input => {
+      input.addEventListener("input", () => generateGradient(false))
+    })
+    SelectMenu.addEventListener("change", () => generateGradient(false))
+    refreshbtn.addEventListener("click", () => generateGradient(true))
+
+    const selectCode = () => {
+      getColorCode.select();
+      getColorCode.setSelectionRange(0, 99999); // For mobile devices
+
+      // Copy the selected text to the clipboard
+      navigator.clipboard.writeText(getColorCode.value);
+
+      // Highlight the input field by adding a CSS class
+      getColorCode.classList.add('highlight');
+
+      // Change the button text to indicate success
+      copyCode.innerText = "Code Copied";
+
+      // Reset the button text and remove the highlight after 1.6 seconds
+      setTimeout(() => {
+        copyCode.innerText = "Copy Code";
+        getColorCode.classList.remove('highlight');
+      }, 1600);
+    }
+    copyCode.addEventListener("click", selectCode)
+  </script>
+</body>
+
+</html>
