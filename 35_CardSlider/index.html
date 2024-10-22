@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <title>Card Slider</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #c6c1c1c6;
+    }
+
+    .card-wrapper {
+      max-width: 1100px;
+      margin: 0 60px;
+      padding: 20px 10px;
+      overflow: hidden;
+    }
+
+    .card-list .card-item {
+      list-style: none;
+    }
+
+    .card-list .card-item .card-link {
+      user-select: none;
+      display: block;
+      background: #fff;
+      padding: 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+      transition: 0.2s ease;
+    }
+     .card-list .card-item .card-link:active{
+      cursor: grabbing;
+     }
+
+    .card-list .card-item .card-link:hover {
+      border-color: #5372f0;
+    }
+
+    .card-list .card-link .card-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card-list .card-link .badge {
+      color: #5372f0;
+      padding: 8px 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: #dde4ff;
+      width: fit-content;
+      border-radius: 50px;
+      margin: 16px 0 18px;
+    }
+
+    .card-list .card-link .badge.designer {
+      color: orange;
+      background: #fff3cd;
+    }
+
+    .card-list .card-link .badge.developer {
+      color: green;
+      background: #d6f8d6;
+    }
+
+    .card-list .card-link .badge.marketer {
+      color: red;
+      background: #fed6ba;
+    }
+
+    .card-list .card-link .badge.developer {
+      color: rgb(29, 191, 245);
+      background: #d6f4f8;
+    }
+
+
+    .card-list .card-link .card-title {
+      font-size: 1.19rem;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .card-list .card-link .card-button {
+      height: 35px;
+      width: 35px;
+      border-radius: 50%;
+      margin: 30px 0 5px;
+      cursor: pointer;
+      border: 2px solid #5372f0;
+      background: none;
+      color: #5372f0;
+      transition: 0.4s ease;
+    }
+
+    .card-list .card-link:hover .card-button {
+      color: #fff;
+      background: #5372f0;
+    }
+
+
+    .card-wrapper .swiper-pagination-bullet {
+      height: 13px;
+      width: 13px;
+      opacity: 0.5;
+      background: #5372f0;
+    }
+
+    .card-wrapper .swiper-pagination-bullet-active {
+      opacity: 1;
+    }
+.card-wrapper .swiper-slide-button{
+  color: #5372f0;
+  margin-top: -35px;
+  
+}
+
+.card-wrapper .swiper-slide-button:hover{
+  color: #0032fb;
+}
+@media screen and (max-width:768px) {
+  .card-wrapper{
+    margin: 0 10px 25px;
+  }
+  .card-wrapper .swiper-slide-button{
+    display: none;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container swiper">
+    <div class="card-wrapper">
+      <ul class="card-list swiper-wrapper">
+        <li class="card-item swiper-slide">
+          <a href="#" class="card-link">
+            <img src="./images/editor.jpg" alt="" class="card-image">
+            <p class="badge editor">Editor</p>
+            <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+            <button class="card-button"> <i class="ri-arrow-right-up-line"></i></button>
+          </a>
+        </li>
+        <li class="card-item swiper-slide">
+          <a href="#" class="card-link">
+            <img src="./images/designer.jpg" alt="" class="card-image">
+            <p class="badge designer">Designer</p>
+            <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+            <button class="card-button"> <i class="ri-arrow-right-up-line"></i></button>
+          </a>
+        </li>
+        <li class="card-item swiper-slide">
+          <a href="#" class="card-link">
+            <img src="./images/developer.jpg" alt="" class="card-image">
+            <p class="badge developer">Developer</p>
+            <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+            <button class="card-button"> <i class="ri-arrow-right-up-line"></i></button>
+          </a>
+        </li>
+        <li class="card-item swiper-slide">
+          <a href="#" class="card-link">
+            <img src="./images/gamer.jpg" alt="" class="card-image">
+            <p class="badge gamer">Gamer</p>
+            <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+            <button class="card-button"> <i class="ri-arrow-right-up-line"></i></button>
+          </a>
+        </li>
+        <li class="card-item swiper-slide">
+          <a href="#" class="card-link">
+            <img src="./images/marketer.jpg" alt="" class="card-image">
+            <p class="badge marketer">Marketer</p>
+            <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+            <button class="card-button"> <i class="ri-arrow-right-up-line"></i></button>
+          </a>
+        </li>
+      </ul>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-slide-button swiper-button-prev"></div>
+      <div class="swiper-slide-button swiper-button-next"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
