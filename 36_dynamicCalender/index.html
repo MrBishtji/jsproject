@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <title>Dynamic Calender</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #33ff99;
+    }
+
+    .cal {
+      width: 400px;
+      background: #0b0808;
+      color: #fff;
+    }
+
+    .calendar ul {
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .cal header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 30px 10px;
+    }
+
+    header .current-date {
+      font-size: 1.45rem;
+      font-weight: 500;
+    }
+
+
+    header .icons i {
+      height: 38px;
+      width: 38px;
+      color: #d4d4ed;
+      font-size: 1.5rem;
+      margin: 0 1px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 38px;
+      border-radius: 50%;
+    }
+
+    header .icons i:hover {
+      background: #f2f2f2;
+    }
+
+    header .icons i:last-child {
+      margin-left: 10px;
+    }
+
+    .calendar {
+      padding: 20px;
+    }
+
+    .calendar ul {
+      display: flex;
+      list-style: none;
+      flex-wrap: wrap;
+      text-align: center;
+      /* margin: 10px; */
+    }
+
+    .calendar .days {
+      margin-bottom: 20px;
+    }
+
+    .calendar .weeks {
+      font-weight: 500;
+    }
+
+
+    .calendar ul li {
+      position: relative;
+      width: calc(100%/7);
+    }
+
+    .calendar .days li {
+      z-index: 1;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    .days li.inactive {
+      color: #5d5c5c;
+    }
+
+    .days li.active {
+      color: #000;
+      font-weight: 700;
+    }
+
+    .calendar .days li::before {
+      position: absolute;
+      content: "";
+      height: 40px;
+      width: 40px;
+      top: 50%;
+      left: 50%;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+
+    .days li:hover::before {
+      background: #f2f2f2;
+      color: #000;
+    }
+
+    .days li.active::before {
+      background: #33ff99;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cal">
+    <header>
+      <p class="current-date"></p>
+      <div class="icons">
+        <i class="ri-arrow-left-s-line prev" id="prev"></i>
+        <i class="ri-arrow-right-s-line next" id="next"></i>
+      </div>
+    </header>
+    <div class="calendar">
+      <ul class="weeks">
+        <li>Sun</li>
+        <li>Mon</li>
+        <li>Tue</li>
+        <li>Wed</li>
+        <li>Thu</li>
+        <li>Fri</li>
+        <li>Sat</li>
+      </ul>
+      <ul class="days">
+      </ul>
+    </div>
+  </div>
+  <script>
+    const currentDate = document.querySelector(".current-date")
+    let day = document.querySelector(".days")
+    let prevNextbtn = document.querySelectorAll(".icons i")
+    // let nextbtn = document.querySelector(".next")
+
+    let date = new Date()
+    curYear = date.getFullYear()
+    curMonth = date.getMonth()
+    // console.log(date,curMonth, curYear);
+
+    const weekdays = ["Sunday", "Monday", "Tuesday", "Webnesday", "Thuesday", "Friday", "Saturday"]
+    const Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    const renderCalendar = () => {
+      let firstDayofMonth = new Date(curYear, curMonth, 1).getDay(),
+        lastDateofMonth = new Date(curYear, curMonth + 1, 0).getDate(),
+        lastDayofMonth = new Date(curYear, curMonth, lastDateofMonth).getDay(),
+        lastDateofLastMonth = new Date(curYear, curMonth, 0).getDate();//getting last day of month
+      let liTag = "";
+
+      for (let i = firstDayofMonth; i > 0; i--) {
+        liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`
+      }
+
+      // console.log(lastDateofMonth);
+      for (let i = 1; i <= lastDateofMonth; i++) {
+        let isToday = i === date.getDate() && curMonth === new Date().getMonth() && curYear === new Date().getFullYear() ? "active" : "";
+        liTag += `<li class=${isToday}>${i}</li>`
+      }
+      for (let i = lastDayofMonth; i < 6; i++) {
+        liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+      }
+
+      currentDate.innerHTML = `${Months[curMonth]} ${curYear}`
+      day.innerHTML = liTag
+    }
+    renderCalendar()
+    prevNextbtn.forEach(icon => {
+      icon.addEventListener("click", () => {
+        curMonth = icon.id === "prev" ? curMonth - 1 : curMonth + 1;
+        ;
+        if (curMonth < 0 || curMonth > 11) {
+          date = new Date(curYear, curMonth)
+          curYear = date.getFullYear()
+          curMonth = date.getMonth()
+        } else {
+          date = new Date()
+        }
+        renderCalendar()
+
+      });
+    })
+  </script>
+</body>
+
+</html>
