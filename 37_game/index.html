@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <title>Game | Rock Paper and Scissor</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #eac69d;
+    }
+
+    .container {
+      padding: 2rem 7rem;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .container.start .user_result{
+      transform-origin: left;
+      animation: userShake 0.7s ease infinite;
+    }
+
+    @keyframes userShake {
+      50% {
+        transform: translateY(10px);
+      }
+    }
+.container.start .cpu_result {
+  transform-origin: right;
+  animation: CpuShake 0.7s ease infinite;
+}
+@keyframes CpuShake {
+      50% {
+        transform: rotate(-10deg);
+      }
+    }
+
+    .result_image {
+      display: flex;
+      column-gap: 7rem;
+    }
+
+    .result_image img {
+      width: 100px;
+    }
+
+    .user_result img {
+      transform: rotate(90deg);
+    }
+
+    .cpu_result img {
+      transform: rotate(-90deg) rotateY(180deg);
+    }
+
+    .result {
+      text-align: center;
+      font-size: 35px;
+      color: #070707;
+      margin-top: 1.5rem;
+      font-weight: 700;
+      padding: 8px;
+      border-radius: 10px;
+      background: #cefa9f;
+    }
+
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2.5rem;
+    }
+.container.container.start .option{
+  pointer-events: none;
+}
+
+    .option-image {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .option-image:hover {
+      opacity: 1;
+    }
+
+    .option-image.active {
+      opacity: 1;
+    }
+
+    .option-image img {
+      width: 50px;
+      pointer-events: none;
+    }
+
+    .option-image p {
+      color: #ff7a06;
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="container">
+    <div class="result_field">
+      <div class="result_image">
+        <div class="user_result">
+          <img src="./images/rock.png" alt="" />
+        </div>
+        <div class="cpu_result">
+          <img src="./images/rock.png" alt="" />
+        </div>
+      </div>
+      <div class="result">
+        <p>Let's Play!</p>
+      </div>
+    </div>
+    <div class="option">
+      <span class="option-image">
+        <img src="./images/rock.png" alt="" />
+        <p>Rock</p>
+      </span>
+      <span class="option-image">
+        <img src="./images/paper.png" alt="" />
+        <p>Paper</p>
+      </span>
+      <span class="option-image">
+        <img src="./images/scissors.png" alt="" />
+        <p>Scissior</p>
+      </span>
+    </div>
+  </section>
+
+  <script>
+    const gameContainer = document.querySelector(".container");
+    let userResult = document.querySelector(".user_result img");
+    let cpuResult = document.querySelector(".cpu_result img");
+    let result = document.querySelector(".result");
+    let optionImage = document.querySelectorAll(".option-image");
+    // console.log(gameContainer, result, userResult, cpuResult, optionImage);
+
+    //loop through each option image element
+    optionImage.forEach((image, index) => {
+      image.addEventListener("click", (e) => {
+        image.classList.add("active");
+
+userResult.src=cpuResult.src= "./images/rock.png"
+result.textContent="Wait..."
+        //loop through each option image again
+        optionImage.forEach((image2, index2) => {
+          // console.log(index, index2);
+          //if the current index doesn't match the clicked index Remove the "active" class from the option image
+          index !== index2 && image2.classList.remove("active");
+        });
+
+        gameContainer.classList.add("start")
+
+        let time = setTimeout(() => {
+
+          gameContainer.classList.remove("start")
+          let imageSrc = e.target.querySelector("img").src;
+          // console.log(imageSrc);
+          userResult.src = imageSrc;
+
+          let randomNumber = Math.floor(Math.random() * 3);
+          // console.log(randomNumber);
+          let cpuImages = [
+            "./images/rock.png",
+            "./images/paper.png",
+            "./images/scissors.png",
+          ];
+          cpuResult.src = cpuImages[randomNumber];
+
+          let cpuValue = ["R", "P", "S"][randomNumber];
+          let userValue = ["R", "P", "S"][index];
+
+          let outComes = {
+            RR: "Draw",
+            RP: "Computer",
+            RS: "You",
+            PP: "Draw",
+            PR: "You",
+            PS: "Computer",
+            SS: "Draw",
+            SP: "You",
+            SR: "Computer",
+          };
+
+          let outComeValue = outComes[userValue + cpuValue];
+          result.textContent =
+            userValue === cpuValue ? "Match Draw" : `${outComeValue} Won!`;
+        }, 2000);
+        let = setTimeout(() => {
+          result.textContent = "Let's Play Again"
+
+        }, 3000)
+      });
+    });
+  </script>
+</body>
+
+</html>
