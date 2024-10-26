@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+  <title>Alarm CLock</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body,
+    .clock,
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #7bd2f0;
+    }
+
+    .clock {
+      width: 450px;
+      background: #d9d9c7;
+      padding: 20px;
+      border-radius: 10px;
+      flex-direction: column;
+    }
+
+    .clock img {
+      max-width: 103px;
+    }
+
+    .clock h1 {
+      font-size: 40px;
+      font-weight: 600;
+      margin: 30px 0;
+    }
+
+    .clock .content {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .content.disable {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .content .column {
+      border-radius: 5px;
+      padding: 0 10px;
+      border: 1px solid #d27d7d;
+      width: 33%;
+      margin: 5px;
+    }
+
+    .column select {
+      background: #d9d9c7;
+      outline: none;
+      border: none;
+      height: 53px;
+      width: 100%;
+      font-size: 19px;
+    }
+
+    .clock button {
+      outline: none;
+      border: none;
+      width: 100%;
+      margin-top: 20px;
+      font-size: 20px;
+      padding: 17px 0;
+      border-radius: 10px;
+      background: #7bd2f0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clock">
+    <img src="./clock.svg" alt="clock">
+    <h1>00:00:00 AM</h1>
+    <div class="content">
+      <div class="column">
+        <select>
+          <option value="Hour" selected hidden>Hour</option>
+
+        </select>
+      </div>
+      <div class="column">
+        <select>
+          <option value="Minute" selected hidden>Minute</option>
+
+        </select>
+      </div>
+      <div class="column">
+        <select>
+          <option value="AM/PM" selected hidden>AM/PM</option>
+
+        </select>
+      </div>
+    </div>
+    <button>
+      Set Alarm
+    </button>
+  </div>
+
+  <script>
+    let selectMenu = document.querySelectorAll("select")
+    let content = document.querySelector(".content")
+    let currentTime = document.querySelector("h1")
+    let setAlarmbtn = document.querySelector("button")
+
+    let AlarmTime,isAlarmSet=false;
+    let ringtone = new Audio("ringtone.mp3");
+    for (let i = 12; i > 0; i--) {
+      i = i < 10 ? "0" + i : i;
+      // console.log(i);
+      let option = `<option value="${i}">${i}</option>`
+      selectMenu[0].firstElementChild.insertAdjacentHTML("afterend", option)
+    }
+    for (let i = 59; i > 0; i--) {
+      i = i < 10 ? "0" + i : i;
+      // console.log(i);
+      let option = `<option value="${i}">${i}</option>`
+      selectMenu[1].firstElementChild.insertAdjacentHTML("afterend", option)
+    }
+    for (let i = 2; i > 0; i--) {
+      let apmpm = i == 1 ? "AM" : "PM"
+      // console.log(apmpm);
+      let option = `<option value="${apmpm}">${apmpm}</option>`
+      selectMenu[2].firstElementChild.insertAdjacentHTML("afterend", option)
+
+    }
+    setInterval(() => {
+      let date = new Date(),
+        h = date.getHours()
+      m = date.getMinutes()
+      s = date.getSeconds()
+      apmpm = "AM";
+
+      if (h >= 12) {
+        h = h - 12
+        apmpm = "PM"
+      }
+
+      h = h == 0 ? h = 12 : h;
+      h = h < 10 ? "0" + h : h;
+      m = m < 10 ? "0" + m : m;
+      s = s < 10 ? "0" + s : s;
+      // console.log(h, m, s);
+
+      currentTime.innerHTML = `${h}:${m}:${s} ${apmpm}`
+
+      if (AlarmTime == `${h}:${m} ${apmpm}`) {
+
+        ringtone.play()
+        ringtone.loop = true
+
+      }
+    }, 1000)
+
+    function setAlarm() {
+      if (isAlarmSet) {
+        AlarmTime=""
+        ringtone.pause()
+        content.classList.remove("disable")
+        setAlarmbtn.innerText = "Set Alarm"
+         return isAlarmSet=false;
+      }
+      let time = `${selectMenu[0].value}:${selectMenu[1].value} ${selectMenu[2].value}`;
+
+      if (time.includes("Hour") || time.includes("Minute") || time.includes("AM/PM")) {
+        return alert("Please enter a valid time to set Alarm!");
+      }
+      isAlarmSet=true
+      AlarmTime = time
+      content.classList.add("disable")
+      setAlarmbtn.innerText = "Clear Alarm"
+    }
+    setAlarmbtn.addEventListener("click", setAlarm)
+  </script>
+</body>
+
+</html>
