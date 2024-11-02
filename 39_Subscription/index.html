@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <title>Subscribe Modal</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      text-align: center;
+      background: #2aa9f8;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    ::selection {
+      color: #fff;
+      background: #05cdfa;
+    }
+
+    .center,
+    .start-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .start-btn a {
+      text-decoration: none;
+      color: #48dbfb;
+      background: #fff;
+      font-size: 31px;
+      padding: 10px 15px;
+      letter-spacing: 1px;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-radius: 5px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-box {
+      top: 40%;
+      opacity: 0;
+      visibility: hidden;
+      background: #fff;
+      height: auto;
+      width: 400px;
+      padding: 30px;
+      border-radius: 5px;
+      border: 1px solid #c3c6c6;
+      box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.216);
+    }
+
+    .start-btn.show-modal {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .modal-box.show-modal {
+      top: 50%;
+      opacity: 1;
+      visibility: visible;
+      transition: 0.5s;
+    }
+
+    .modal-box .times {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #48dbfb;
+      height: 45px;
+      width: 50px;
+      line-height: 40px;
+      color: #fff;
+      font-size: 20px;
+      border-radius: 0 5px 0 50px;
+      padding-left: 13px;
+      cursor: pointer;
+    }
+
+    .times:hover {
+      font-size: 25px;
+    }
+
+    .modal-box .icon1 {
+      display: inline-block;
+      font-size: 60px;
+      background: #2aa9f8;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      color: #fff;
+      line-height: 100px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .modal-box header {
+      font-size: 31px;
+      font-family: "lobster Two";
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .modal-box p {
+      line-height: 20px;
+      margin-bottom: 10px;
+      color: gray;
+    }
+
+    form {
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      position: relative;
+    }
+
+    form input,
+    form button {
+      height: 50px;
+      width: 95%;
+      border-radius: 3px;
+    }
+
+    form .icon2 {
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      left: 10px;
+      background: #48dbfb;
+      color: #ffffff;
+      line-height: 50px;
+      font-size: 26px;
+      border-radius: 5px 0 0 5px;
+    }
+
+    form input {
+      padding: 0 65px;
+      font-size: 18px;
+      outline: none;
+      border: 2px solid #1ed2fa;
+      caret-color: #48dbfb;
+    }
+
+    input::placeholder {
+      color: #8c8c8c;
+    }
+
+    form input:focus {
+      box-shadow: 0 0 15px #82e6fc,
+        0 0 25px #b4f0fd,
+        0 0 35px #ffffff;
+    }
+
+    form button {
+      margin-top: 15px;
+      background: #48dbfb;
+      color: #fff;
+      font-size: 25px;
+      border: 1px solid #1ed2fa;
+      letter-spacing: 1px;
+      cursor: pointer;
+      outline: none;
+      transition: .3s;
+    }
+
+    form button:hover {
+      background: #1ed2fa;
+      border: 1px solid #05cdfa;
+      letter-spacing: 2px;
+    }
+
+    .modal-box .icons {
+      margin-top: 25px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .icons div {
+      font-size: 30px;
+      margin: 0 7px;
+      color: #05738b;
+      cursor: pointer;
+    }
+
+    .icons div:hover {
+      transform: scale(1.2);
+      color: #05cdfa;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="start-btn">
+    <a href="#">View Modal</a>
+  </div>
+  <div class="center modal-box">
+    <div class="ri-close-line times"></div>
+    <div class="ri-mail-fill icon1"></div>
+    <header>Don't miss updates from us!</header>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam,
+      molestias adipisicing.
+    </p>
+    <form action="">
+      <div class="ri-mail-fill icon2"></div>
+      <input type="email" placeholder="abc@example.gmail" required />
+      <button>Subscribe</button>
+    </form>
+    <div class="icons">
+      <div class="ri-facebook-fill icon"></div>
+      <div class="ri-twitter-x-fill icon"></div>
+      <div class="ri-youtube-fill icon"></div>
+      <div class="ri-instagram-fill icon"></div>
+    </div>
+  </div>
+  <script>
+    let boxModal = document.querySelector(".modal-box")
+    let startBtn = document.querySelector(".start-btn")
+    let cut = document.querySelector(".times")
+    startBtn.addEventListener("click", function () {
+      boxModal.classList.toggle("show-modal")
+      startBtn.classList.toggle("show-modal")
+    })
+    cut.addEventListener("click", function () {
+      boxModal.classList.remove("show-modal")
+      startBtn.classList.remove("show-modal")
+    })
+  </script>
+</body>
+
+</html>
