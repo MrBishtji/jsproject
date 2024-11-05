@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        border-radius: 5px;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(red, blue);
+        text-align: center;
+        font-family: sans-serif;
+      }
+
+      .container {
+        position: relative;
+        width: 400px;
+        background: white;
+        padding: 60px 40px;
+      }
+
+      header {
+        font-size: 40px;
+        margin-bottom: 60px;
+        font-weight: bold;
+      }
+
+      .input-feild,
+      form .button {
+        margin: 25px 0;
+        position: relative;
+        height: 50px;
+        width: 100%;
+      }
+
+      .input-feild input {
+        height: 100%;
+        width: 100%;
+        border: 1px solid silver;
+        padding-left: 15px;
+        outline: none;
+        font-size: 19px;
+        transition: 0.4s;
+      }
+
+      input:focus {
+        border: 1px solid #87ceeb;
+      }
+
+      .input-feild label,
+      span.show {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      span.show {
+        right: 10px;
+        text-transform: uppercase;
+        color: #111;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+        visibility: hidden;
+      }
+      input:valid ~ span.show {
+        visibility: visible;
+      }
+      .input-feild label {
+        left: 15px;
+        pointer-events: none;
+        color: gray;
+        font-size: 18px;
+        transition: 0.4s;
+      }
+
+      input:valid ~ label,
+      input:focus ~ label {
+        transform: translateY(-34px);
+        background: #fff;
+        color: #87ceeb;
+        font-size: 16px;
+      }
+
+      form .button {
+        margin-top: 30px;
+        overflow: hidden;
+        z-index: 111;
+      }
+
+      .button .inner {
+        position: absolute;
+        height: 100%;
+        width: 300%;
+        left: -100%;
+        z-index: -1;
+        transition: all 0.4s;
+        background: -webkit-linear-gradient(
+          right,
+          #00dbde,
+          #fc00ff,
+          #00dbde,
+          #fc00ff
+        );
+      }
+
+      .button:hover .inner {
+        left: 0;
+      }
+
+      .button button {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: none;
+        color: #ffffff;
+        outline: none;
+        font-size: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .container .auth {
+        margin: 35px 0 20px 0;
+        font-size: 19px;
+        color: gray;
+      }
+
+      .links {
+        display: flex;
+        cursor: pointer;
+      }
+
+      .fb,
+      .google {
+        height: 40px;
+        width: 100%;
+        border: 1px solid silver;
+        border-radius: 3px;
+        margin: 0 10px;
+        transition: 0.4s;
+      }
+
+      .fb:hover {
+        border-color: #1877f2;
+      }
+
+      .fb i,
+      .fb span {
+        color: #1877f2;
+      }
+
+      .google:hover {
+        border-color: red;
+      }
+
+      .google i,
+      .google span {
+        color: red;
+      }
+
+      .links i {
+        font-size: 23px;
+        line-height: 40px;
+        margin-left: -90px;
+      }
+
+      .links span {
+        position: absolute;
+        font-size: 17px;
+        font-weight: bold;
+        padding-left: 5px;
+      }
+
+      .signup {
+        margin-top: 50px;
+      }
+
+      .signup a {
+        color: #1877f2;
+        text-decoration: none;
+      }
+
+      .signup a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>Login</header>
+      <form action="">
+        <div class="input-feild">
+          <input type="text" required />
+          <label>Email or Username</label>
+        </div>
+        <div class="input-feild">
+          <input type="password" class="ps" required />
+          <span class="show">Show</span>
+          <label>Password</label>
+        </div>
+        <div class="button">
+          <div class="inner"></div>
+          <button>Login</button>
+        </div>
+      </form>
+      <div class="auth">Or login with</div>
+      <div class="links">
+        <div class="fb">
+          <i class="ri-facebook-box-fill"><span>Facebook</span></i>
+        </div>
+        <div class="google">
+          <i class="ri-google-fill"><span>Google</span></i>
+        </div>
+      </div>
+      <div class="signup">Not a member? <a href="#">Signup now</a></div>
+    </div>
+    <script>
+      let HideShow = document.querySelector(".show");
+      let inputfield = document.querySelector(".ps");
+      HideShow.addEventListener("click", function () {
+        if (inputfield.type === "password") {
+          inputfield.type = "text";
+          HideShow.innerHTML = "Hide";
+          HideShow.style.color = "#1877F2";
+        } else {
+          inputfield.type = "password";
+          HideShow.innerHTML = "show";
+          HideShow.style.color = "#111";
+        }
+      });
+    </script>
+  </body>
+</html>
