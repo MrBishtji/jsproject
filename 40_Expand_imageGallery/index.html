@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expanding Card</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .wrapper {
+      width: 100%;
+      margin: auto;
+      height: 100vh;
+      background: lightblue;
+      display: flex;
+      justify-content: space-between;
+      padding: 50px 5px;
+    }
+
+    .card {
+      width: 7%;
+      height: 80vh;
+      border-radius: 50px;
+      background: rebeccapurple;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      cursor: pointer;
+      transition: 0.4s ease-in;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .card:nth-child(1) {
+      background-image: url(./img4.jpg);
+    }
+
+    .card:nth-child(2) {
+      background-image: url(./img.jpg);
+    }
+
+    .card:nth-child(3) {
+      background-image: url(./img2.jpg);
+    }
+
+    .card:nth-child(4) {
+      background-image: url(./img3.jpg);
+    }
+
+    .card:nth-child(5) {
+      background-image: url(./img5.jpg);
+    }
+
+    .card h3 {
+      font-size: 25px;
+      font-weight: bold;
+      position: absolute;
+      bottom: 120px;
+      left: 20px;
+      opacity: 0;
+      text-shadow: 0px 0px 10px rgb(42, 250, 0);
+    }
+
+    .card p {
+      font-size: 22;
+      text-shadow: 0px 0px 10px rgb(246, 0, 250);
+      position: absolute;
+      bottom: 30px;
+      left: 15px;
+      opacity: 0;
+      font-weight: 600;
+    }
+
+    .active {
+      width: 70%;
+    }
+
+    .active h3 {
+      opacity: 1;
+      transition: 0.7s ease-in;
+    }
+
+    .active p {
+      opacity: 1;
+      transition: 1s ease-in;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="card active">
+      <h3>Light Image</h3>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente aut ut impedit aliquid deserunt atque ea
+        consectetur! Consequatur quas eveniet reprehenderit tenetur totam veniam laborum ullam laboriosam neque,
+        suscipit saepe?</p>
+    </div>
+    <div class="card">
+      <h3>Light Image</h3>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente aut ut impedit aliquid deserunt atque ea
+        consectetur! Consequatur quas eveniet reprehenderit tenetur totam veniam laborum ullam laboriosam neque,
+        suscipit saepe?</p>
+    </div>
+    <div class="card">
+      <h3>Light Image</h3>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente aut ut impedit aliquid deserunt atque ea
+        consectetur! Consequatur quas eveniet reprehenderit tenetur totam veniam laborum ullam laboriosam neque,
+        suscipit saepe?</p>
+    </div>
+    <div class="card">
+      <h3>Light Image</h3>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente aut ut impedit aliquid deserunt atque ea
+        consectetur! Consequatur quas eveniet reprehenderit tenetur totam veniam laborum ullam laboriosam neque,
+        suscipit saepe?</p>
+    </div>
+    <div class="card">
+      <h3>Light Image</h3>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente aut ut impedit aliquid deserunt atque ea
+        consectetur! Consequatur quas eveniet reprehenderit tenetur totam veniam laborum ullam laboriosam neque,
+        suscipit saepe?</p>
+    </div>
+  </div>
+  <script>
+    let cards = document.querySelectorAll(".card")
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        cards.forEach((item) => {
+          item.classList.remove("active")
+
+        })
+        card.classList.add("active")
+      })
+    }) 
+  </script>
+</body>
+
+</html>
