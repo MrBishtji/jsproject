@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Animation</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body{
+      overflow-x: hidden;
+      background: linear-gradient(70deg,red,yellow);
+    }
+    .main{
+      width: 300px;
+      height: 200px;
+      background: greenyellow;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px auto;
+      font-size: 30px;
+      font-weight: bold;
+      transition: 1.2s;
+    }
+    .main:nth-of-type(odd){
+      transform: translateX(-1200px);
+    }
+    .main:nth-of-type(even){
+      transform: translateX(1200px);
+    }
+    .active{
+transform: translateX(0) !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+  <div class="main">Content </div>
+</body>
+<script>
+ let allItems=document.querySelectorAll(".main")
+ const centerDivs=()=>{
+allItems.forEach((items) => {
+  let windowH=window.innerHeight
+  let top=items.getBoundingClientRect().top;
+  console.log(items.getBoundingClientRect());
+  
+  if(top<windowH){
+    items.classList.add("active")
+  }else{
+    items.classList.remove("active")
+    }
+});
+ }
+
+ centerDivs()
+ window.addEventListener("scroll",centerDivs)
+
+ 
+</script>
+</html>
