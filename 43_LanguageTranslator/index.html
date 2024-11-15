@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <title>Language Translator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #47bd02;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+
+    }
+
+    .trans {
+      background: #fff;
+      /* set width according to your width */
+      /* width: 70%; */
+      max-width: 500px;
+      padding: 10px;
+      border-radius: 7px;
+    }
+
+    .box {
+      border: 1px solid rgba(88, 86, 86, 0.315);
+      border-radius: 5px;
+    }
+
+    .box .textbox {
+      display: flex;
+      border-bottom: 1px solid #bbb;
+    }
+
+    .textbox .to-text {
+      border-radius: 0px;
+      border-left: 1px solid #bbb;
+    }
+
+    .textbox textarea {
+      height: 250px;
+      width: 100%;
+      border: none;
+      outline: none;
+      background: none;
+      border-radius: 5px;
+      font-size: 16px;
+      resize: none;
+      padding: 10px 15px;
+    }
+
+    .controls,
+    li,
+    .icons,
+    .icons div {
+      display: flex;
+      /* changes according to your width*/
+      align-items: center;
+      justify-content: center;
+    }
+
+    .controls {
+      list-style: none;
+      padding: 12px 15px;
+    }
+
+    .controls .row.from .icons {
+      padding-right: 15px;
+      border-right: 1px solid #bbb;
+    }
+
+    .controls .row.to .icons {
+      padding-left: 15px;
+      border-left: 1px solid #bbb;
+    }
+
+    .controls .icons {
+      width: 38%;
+    }
+
+    .controls .icons div {
+      width: 50px;
+      color: #9f9f9f;
+      cursor: pointer;
+      font-size: 14px;
+      justify-content: center;
+    }
+
+    .controls .row select {
+      border: none;
+      outline: none;
+      font-size: 18px;
+      background: none;
+    }
+
+    .controls .exchange {
+      color: #9f9f9f;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .trans button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      font-size: 18px;
+      color: #fff;
+      background: #47bd02;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="trans">
+    <div class="box">
+      <div class="textbox">
+        <textarea class="from-text" placeholder="Enter text here"></textarea>
+        <textarea class="to-text" placeholder="Translation" readonly disabled></textarea>
+      </div>
+      <ul class="controls">
+        <li class="row from">
+          <div class="icons">
+            <div id="from" class="ri-volume-up-fill"></div>
+            <div id="from" class="ri-file-copy-2-fill copy"></div>
+          </div>
+          <select>
+          </select>
+        </li>
+        <li class="exchange">
+          <i class="ri-arrow-left-right-fill"></i>
+        </li>
+        <li class="row to">
+          <select>
+          </select>
+          <div class="icons">
+            <div id="to" class="ri-volume-up-fill"></div>
+            <div id="to" class="ri-file-copy-2-fill copy"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <button id="tranbtn">Translate Text</button>
+  </div>
+</body>
+<script src="language.js"></script>
+<script>
+  const fromText = document.querySelector(".from-text")
+  const toText = document.querySelector(".to-text")
+  const selectTag = document.querySelectorAll("select");
+  const exchangeIcon = document.querySelector(".exchange");
+  const Translatebtn = document.getElementById("tranbtn")
+  const icons = document.querySelectorAll(".row div")
+
+  selectTag.forEach((tag, id) => {
+    for (const country_code in countries) {
+      let selected;
+      if (id == 0 && country_code == "en-GB") {
+        selected = "selected"
+      } else if (id == 1 && country_code == "hi-IN") {
+        selected = "selected"
+      }
+      let option = `<option value="${country_code}" ${selected}>${countries[country_code]}</option>`
+      tag.insertAdjacentHTML("beforeend", option)
+    }
+  })
+
+  exchangeIcon.addEventListener("click", () => {
+    let tempText = fromText.value,
+      tempLang = selectTag[0].value;
+    fromText.value = toText.value
+    toText.value = tempText
+    selectTag[0].value = selectTag[1].value
+    selectTag[1].value = tempLang
+  })
+
+  Translatebtn.addEventListener("click", () => {
+    let Text = fromText.value,
+      TranslateFrom = selectTag[0].value, //getting fromSelect tag value
+      TranslateTo = selectTag[1].value//getting toSelect tag value
+
+    let apiUrl = `https://api.mymemory.translated.net/get?q=${Text}&langpair=${TranslateFrom}|${TranslateTo}`
+    fetch(apiUrl).then(res => res.json()).then(data => {
+      toText.value = data.responseData.translatedText
+
+    })
+
+  })
+  icons.forEach(icon => {
+    icon.addEventListener("click", ({ target }) => {
+      if (target.classList.contains("copy")) {
+        if (target.id == "from") {
+          navigator.clipboard.writeText(fromText.value)
+}
+         else {
+          navigator.clipboard.writeText(toText.value)
+
+        }
+      }
+      else {
+        let utterance;
+        if (target.id == "from") {
+          utterance = new SpeechSynthesisUtterance(fromText.value)
+          utterance.lang = selectTag[0].value;
+          console.log("selectTag[0].value;", selectTag[0].value);
+
+          console.log("target.id from ", target.id);
+
+        } 
+        else {
+          console.log("target.id to ", target.id);
+
+          utterance = new SpeechSynthesisUtterance(toText.value)
+          utterance.lang = selectTag[1].value
+          console.log(utterance);
+          console.log(selectTag[1].value);
+
+
+        }
+        console.log("utterance 1", utterance);
+
+        speechSynthesis.speak(utterance)
+      }
+    })
+  })
+</script>
+
+</html>
